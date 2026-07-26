@@ -11,7 +11,7 @@ const PDFIcon = () => (
 
 const HeroInfoCard = () => {
   return (
-    <div className="px-4 sm:px-6 lg:px-8 -mt-24 md:-mt-32 relative z-10">
+    <div id="overview" className="px-4 sm:px-6 lg:px-8 -mt-24 md:-mt-32 relative z-10 scroll-mt-24 md:scroll-mt-28">
       <div className="container mx-auto max-w-3xl">
         <div className="bg-white/95 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-md overflow-hidden border border-ora-sand">
           <div className="grid grid-cols-2 divide-x divide-y divide-ora-sand">

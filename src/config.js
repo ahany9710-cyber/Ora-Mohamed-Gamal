@@ -23,7 +23,7 @@ export const config = {
   // ——— Google Ads (تهيئة جوجل أدز) ———
   // معرف Google Tag العالمي (مثل AW-XXXXXXXXX) - يُحمّل في كل الصفحات
   // Global Tag ID (e.g. AW-XXXXXXXXX) - loaded on all pages
-  gtag_id: 'AW-17872457649',
+  gtag_id: 'AW-18202386140',
 
   // معرف التحويل (اختياري - للتوثيق، التتبع الفعلي يستخدم gtag_id + conversion_label)
   // Conversion ID from Google Ads (optional - for reference; tracking uses gtag_id + conversion_label)

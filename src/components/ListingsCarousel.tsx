@@ -29,7 +29,7 @@ const ListingsCarousel = () => {
   const nextIndex = (currentIndex + 1) % listings.length;
 
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-8 md:pb-12 lg:pb-20">
+    <section id="units" className="w-full px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-8 md:pb-12 lg:pb-20">
       <div className="container mx-auto">
         <div className="text-center mb-6 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-ora-ink mb-3 md:mb-4">

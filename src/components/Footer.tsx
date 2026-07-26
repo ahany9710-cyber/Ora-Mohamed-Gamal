@@ -7,7 +7,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-ora-navy text-gray-300">
+    <footer id="contact" className="bg-ora-navy text-gray-300 scroll-mt-24 md:scroll-mt-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <motion.div
@@ -75,17 +75,23 @@ const Footer = () => {
           >
             <h4 className="text-lg font-semibold text-white mb-4">روابط سريعة</h4>
             <div className="space-y-3">
-              <button
-                onClick={scrollToForm}
-                className="block text-gray-400 hover:text-ora-lagoon transition-colors text-right"
-              >
+              <a href="#units" className="block text-gray-400 hover:text-ora-lagoon transition-colors text-right">
+                الوحدات
+              </a>
+              <a href="#payment-plan" className="block text-gray-400 hover:text-ora-lagoon transition-colors text-right">
+                خطة الدفع
+              </a>
+              <a href="#lead-form" onClick={(e) => { e.preventDefault(); scrollToForm(); }} className="block text-gray-400 hover:text-ora-lagoon transition-colors text-right">
                 تحميل البروشور
-              </button>
+              </a>
+              <a href="#faq" className="block text-gray-400 hover:text-ora-lagoon transition-colors text-right">
+                الأسئلة الشائعة
+              </a>
               <a
                 href={`tel:${config.phoneNumber}`}
                 className="block text-gray-400 hover:text-ora-lagoon transition-colors text-right"
               >
-                اتصل الآن
+                اتصل بنا
               </a>
               <a
                 href={`https://wa.me/${config.whatsappNumber}`}

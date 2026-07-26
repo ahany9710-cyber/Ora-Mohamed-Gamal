@@ -19,4 +19,15 @@
   * {
     @apply focus:outline-none focus:ring-2 focus:ring-ora-blue focus:ring-offset-2;
   }
+
+  /* Sticky header offset for anchor links */
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  @media (min-width: 768px) {
+    [id] {
+      scroll-margin-top: 6rem;
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Hero from '../components/Hero';
 import HeroInfoCard from '../components/HeroInfoCard';
 import ListingsCarousel from '../components/ListingsCarousel';
@@ -27,6 +28,15 @@ const paymentPoints = [
 ];
 
 const Landing = () => {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const timer = window.setTimeout(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
     <main>
       <Hero />
