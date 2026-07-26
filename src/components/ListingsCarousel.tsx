@@ -32,15 +32,15 @@ const ListingsCarousel = () => {
     <section className="w-full px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-8 md:pb-12 lg:pb-20">
       <div className="container mx-auto">
         <div className="text-center mb-6 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-            شاليهات كاملة التشطيب
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-ora-ink mb-3 md:mb-4">
+            وحدات Silver Walk & Silver Bay
           </h2>
           <p className="text-base sm:text-lg text-gray-600 mb-3 md:mb-4">
-            بإطلالة خلابة على البحر الاحمر من إدارة مجموعة الماريوت
+            Fully Finished + ACs · 5% مقدم · أقساط على 8 سنوات
           </p>
           {/* Card counter - very visible */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full">
-            <span className="text-sm md:text-base font-semibold text-tatweer-orange">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 rounded-full">
+            <span className="text-sm md:text-base font-semibold text-ora-blue">
               الوحدة المميزة {currentIndex + 1} من {listings.length}
             </span>
           </div>
@@ -50,11 +50,11 @@ const ListingsCarousel = () => {
           {/* Mobile-optimized navigation arrows - larger and more accessible */}
           <button
             onClick={prevListing}
-            className="absolute left-0 sm:left-2 md:left-4 lg:left-2 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-3 sm:p-4 md:p-5 shadow-2xl active:bg-orange-50 transition-all duration-200 active:scale-95 border-2 border-gray-200 active:border-tatweer-orange min-w-[48px] min-h-[48px] flex items-center justify-center"
+            className="absolute left-0 sm:left-2 md:left-4 lg:left-2 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-3 sm:p-4 md:p-5 shadow-2xl active:bg-sky-50 transition-all duration-200 active:scale-95 border-2 border-gray-200 active:border-ora-blue min-w-[48px] min-h-[48px] flex items-center justify-center"
             aria-label="الوحدة السابقة"
           >
             <svg
-              className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-tatweer-orange"
+              className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-ora-blue"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -70,11 +70,11 @@ const ListingsCarousel = () => {
 
           <button
             onClick={nextListing}
-            className="absolute right-0 sm:right-2 md:right-4 lg:right-2 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-3 sm:p-4 md:p-5 shadow-2xl active:bg-orange-50 transition-all duration-200 active:scale-95 border-2 border-gray-200 active:border-tatweer-orange min-w-[48px] min-h-[48px] flex items-center justify-center"
+            className="absolute right-0 sm:right-2 md:right-4 lg:right-2 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-3 sm:p-4 md:p-5 shadow-2xl active:bg-sky-50 transition-all duration-200 active:scale-95 border-2 border-gray-200 active:border-ora-blue min-w-[48px] min-h-[48px] flex items-center justify-center"
             aria-label="الوحدة التالية"
           >
             <svg
-              className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-tatweer-orange"
+              className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-ora-blue"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -139,7 +139,7 @@ const ListingsCarousel = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
                       </svg>
                       <span className="text-sm font-medium text-gray-600">اسحب يميناً أو يساراً</span>
-                      <svg className="w-5 h-5 text-tatweer-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-ora-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </div>
@@ -152,7 +152,7 @@ const ListingsCarousel = () => {
                           {currentListing.image ? (
                             <img src={currentListing.image} alt={currentListing.name} className="w-full h-full object-cover object-center" />
                           ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center text-tatweer-orange p-4">
+                            <div className="w-full h-full flex flex-col items-center justify-center text-ora-blue p-4">
                               <svg className="w-12 h-12 sm:w-16 sm:h-16 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                               </svg>
@@ -165,7 +165,7 @@ const ListingsCarousel = () => {
                       {/* Content section */}
                       <div className="flex flex-col justify-center order-2 md:order-2">
                         <div className="mb-2 flex flex-wrap gap-2">
-                          <span className="inline-block px-3 py-1.5 bg-orange-100 text-tatweer-orange rounded-full text-xs sm:text-sm font-semibold">
+                          <span className="inline-block px-3 py-1.5 bg-sky-100 text-ora-blue rounded-full text-xs sm:text-sm font-semibold">
                             الوحدة {currentIndex + 1}
                           </span>
                           <span className="inline-block px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs sm:text-sm font-semibold">
@@ -175,7 +175,7 @@ const ListingsCarousel = () => {
                         <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 mt-2">
                           {currentListing.name}
                         </h3>
-                        <p className="text-tatweer-orange font-medium mb-4 text-sm sm:text-base">{currentListing.tagline}</p>
+                        <p className="text-ora-blue font-medium mb-4 text-sm sm:text-base">{currentListing.tagline}</p>
                         
                         {/* Details - mobile optimized */}
                         <div className="space-y-2.5 sm:space-y-3 mb-4 sm:mb-6">
@@ -205,7 +205,7 @@ const ListingsCarousel = () => {
                           </div>
                           <div className="flex items-center justify-between py-2">
                             <span className="text-gray-600 text-sm sm:text-base">السعر</span>
-                            <span className="font-bold text-tatweer-orange text-sm sm:text-base">
+                            <span className="font-bold text-ora-blue text-sm sm:text-base">
                               {currentListing.priceRange}
                             </span>
                           </div>
@@ -215,7 +215,7 @@ const ListingsCarousel = () => {
                         <motion.button
                           onClick={scrollToForm}
                           whileTap={{ scale: 0.97 }}
-                          className="w-full px-6 py-4 sm:py-5 bg-tatweer-orange text-white rounded-xl active:bg-orange-600 transition-all duration-200 font-bold shadow-lg text-base sm:text-lg min-h-[52px] flex items-center justify-center"
+                          className="w-full px-6 py-4 sm:py-5 bg-ora-blue text-white rounded-xl active:bg-ora-blue-light transition-all duration-200 font-bold shadow-lg text-base sm:text-lg min-h-[52px] flex items-center justify-center"
                         >
                           طلب التفاصيل
                         </motion.button>
@@ -256,7 +256,7 @@ const ListingsCarousel = () => {
                 onClick={() => goToIndex(index)}
                 className={`transition-all duration-300 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center ${
                   index === currentIndex
-                    ? 'bg-tatweer-orange w-12 h-5 sm:h-6 shadow-lg'
+                    ? 'bg-ora-blue w-12 h-5 sm:h-6 shadow-lg'
                     : 'bg-gray-300 w-5 h-5 sm:w-6 sm:h-6 active:bg-gray-400 active:w-7'
                 }`}
                 aria-label={`الانتقال إلى الوحدة ${index + 1}`}

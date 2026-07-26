@@ -6,11 +6,11 @@ import { config } from '../config';
 const FORMSPREE_ENDPOINT = `https://formspree.io/f/${config.formspreeFormId}`;
 
 const PROJECT_OPTIONS = [
-  { id: 'studios', name: 'Studios' },
-  { id: 'one-bedroom', name: 'One Bedroom' },
-  { id: 'two-bedrooms', name: 'Two Bedrooms' },
-  { id: 'executive', name: 'Executive Units' },
-  { id: 'penthouse', name: 'Penthouse' },
+  { id: 'sw-1br', name: 'Silver Walk — 1 Bedroom (68 sqm)' },
+  { id: 'sw-2br', name: 'Silver Walk — 2 Bedroom (95 sqm)' },
+  { id: 'sw-3br', name: 'Silver Walk — 3 Bedroom (134 sqm)' },
+  { id: 'sb-cabana', name: 'Silver Bay — 1 Bedroom Cabana (51 sqm)' },
+  { id: 'sb-lodge', name: 'Silver Bay — 2 Bedroom Lodge (102 sqm)' },
 ];
 
 interface FormData {
@@ -184,8 +184,8 @@ const LeadForm = () => {
                     className={`w-full px-4 py-3 rounded-xl border-2 transition-colors ${
                       errors.fullName
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-300 focus:border-tatweer-orange'
-                    } focus:outline-none focus:ring-2 focus:ring-tatweer-orange focus:ring-offset-2`}
+                        : 'border-gray-300 focus:border-ora-blue'
+                    } focus:outline-none focus:ring-2 focus:ring-ora-blue focus:ring-offset-2`}
                     placeholder="أدخل اسمك الكامل"
                   />
                   {errors.fullName && (
@@ -210,8 +210,8 @@ const LeadForm = () => {
                     className={`w-full px-4 py-3 rounded-xl border-2 transition-colors ${
                       errors.phoneNumber
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-300 focus:border-tatweer-orange'
-                    } focus:outline-none focus:ring-2 focus:ring-tatweer-orange focus:ring-offset-2`}
+                        : 'border-gray-300 focus:border-ora-blue'
+                    } focus:outline-none focus:ring-2 focus:ring-ora-blue focus:ring-offset-2`}
                     placeholder="+20 123 456 7890 (مع كود الدولة)"
                   />
                   {errors.phoneNumber && (
@@ -236,8 +236,8 @@ const LeadForm = () => {
                     className={`w-full px-4 py-3 rounded-xl border-2 transition-colors ${
                       errors.confirmPhoneNumber
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-300 focus:border-tatweer-orange'
-                    } focus:outline-none focus:ring-2 focus:ring-tatweer-orange focus:ring-offset-2`}
+                        : 'border-gray-300 focus:border-ora-blue'
+                    } focus:outline-none focus:ring-2 focus:ring-ora-blue focus:ring-offset-2`}
                     placeholder="أدخل رقم إضافي إن وجد"
                   />
                   {errors.confirmPhoneNumber && (
@@ -257,7 +257,7 @@ const LeadForm = () => {
                         value="whatsapp"
                         checked={formData.contactMethod === 'whatsapp'}
                         onChange={(e) => handleChange('contactMethod', e.target.value)}
-                        className="w-4 h-4 text-tatweer-orange focus:ring-tatweer-orange"
+                        className="w-4 h-4 text-ora-blue focus:ring-ora-blue"
                       />
                       <span className="ml-2 text-gray-700">واتساب</span>
                     </label>
@@ -268,7 +268,7 @@ const LeadForm = () => {
                         value="call"
                         checked={formData.contactMethod === 'call'}
                         onChange={(e) => handleChange('contactMethod', e.target.value)}
-                        className="w-4 h-4 text-tatweer-orange focus:ring-tatweer-orange"
+                        className="w-4 h-4 text-ora-blue focus:ring-ora-blue"
                       />
                       <span className="ml-2 text-gray-700">مكالمة</span>
                     </label>
@@ -294,8 +294,8 @@ const LeadForm = () => {
                     className={`w-full px-4 py-3 rounded-xl border-2 transition-colors ${
                       errors.interestedProject
                         ? 'border-red-500 focus:border-red-500'
-                        : 'border-gray-300 focus:border-tatweer-orange'
-                    } focus:outline-none focus:ring-2 focus:ring-tatweer-orange focus:ring-offset-2`}
+                        : 'border-gray-300 focus:border-ora-blue'
+                    } focus:outline-none focus:ring-2 focus:ring-ora-blue focus:ring-offset-2`}
                   >
                     <option value="">اختر الوحدة المهتم بها</option>
                     {PROJECT_OPTIONS.map((project) => (
@@ -316,7 +316,7 @@ const LeadForm = () => {
                   whileTap={{ scale: isFormValid() && !isSubmitting ? 0.98 : 1 }}
                   className={`w-full px-6 py-4 rounded-xl font-semibold text-white transition-all duration-200 shadow-lg ${
                     isFormValid() && !isSubmitting
-                      ? 'bg-tatweer-orange hover:bg-orange-600 cursor-pointer'
+                      ? 'bg-ora-blue hover:bg-ora-blue-light cursor-pointer'
                       : 'bg-gray-400 cursor-not-allowed'
                   }`}
                 >

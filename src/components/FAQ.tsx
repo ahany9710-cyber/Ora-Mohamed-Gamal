@@ -11,12 +11,12 @@ const faqs: FAQItem[] = [
   {
     question: 'هل التقسيط متاح؟',
     answer:
-      'نعم، IL Monte Galala - Marina Towers من تطوير Tatweer Misr يوفر خطط دفع مرنة تصل إلى 10 سنوات تقسيط. سيعمل فريقنا معك لإيجاد خطة تناسب ميزانيتك ووضعك المالي.',
+      'نعم. خطة الدفع في Silver Walk و Silver Bay: 5% مقدم، 5% عند التعاقد، ثم أقساط متساوية على 8 سنوات. الوحدات Fully Finished مع تكييفات، ويمكن بدء EOI بـ 5%.',
   },
   {
-    question: 'ما هو جدول التسليم؟',
+    question: 'ما الفرق بين Silver Bay و Silver Walk؟',
     answer:
-      'تاريخ استلام مشروع IL Monte Galala - Marina Towers في العين السخنة على البحر الأحمر هو عام 2030. نحافظ على جداول بناء صارمة ونبقي عملاءنا على اطلاع طوال عملية التطوير مع تحديثات منتظمة حول التقدم.',
+      'Silver Bay مجموعة حصرية على واجهة اللاجون مع وصول مباشر للخليج وإطلالات مائية أوسع (Cabana و Lodge). Silver Walk وجهة حول بروميناد نابض بالمقاهي والمطاعم والتجزئة — شقق 1 و 2 و 3 غرف.',
   },
   {
     question: 'كيف يمكنني زيارة الموقع؟',
@@ -41,12 +41,8 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            الأسئلة الشائعة
-          </h2>
-          <p className="text-gray-600 text-lg">
-            ابحث عن إجابات للأسئلة الشائعة حول عقاراتنا
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-ora-ink mb-4">الأسئلة الشائعة</h2>
+          <p className="text-gray-600 text-lg">إجابات سريعة حول Silversands — Silver Walk & Silver Bay</p>
         </motion.div>
 
         <div className="space-y-4">
@@ -57,31 +53,24 @@ const FAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-md overflow-hidden"
+              className="bg-white rounded-2xl shadow-md overflow-hidden border border-ora-sand"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-4 text-right flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-tatweer-orange focus:ring-offset-2 rounded-2xl"
+                className="w-full px-6 py-4 text-right flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-ora-blue focus:ring-offset-2 rounded-2xl"
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-answer-${index}`}
               >
-                <span className="font-semibold text-gray-900 text-lg pl-4">
-                  {faq.question}
-                </span>
+                <span className="font-semibold text-ora-ink text-lg pl-4">{faq.question}</span>
                 <motion.svg
-                  className="w-5 h-5 text-tatweer-orange flex-shrink-0"
+                  className="w-5 h-5 text-ora-blue flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </motion.svg>
               </button>
               <AnimatePresence>
@@ -98,18 +87,18 @@ const FAQ = () => {
                       {faq.answer === 'custom' ? (
                         <>
                           <p className="mb-4">
-                            يمكنك جدولة زيارة للموقع بالاتصال بنا على{' '}
+                            يمكنك جدولة زيارة لـ Silversands بالاتصال بنا على{' '}
                             <a
                               href={`tel:${config.phoneNumber}`}
-                              className="text-tatweer-orange font-semibold hover:underline"
+                              className="text-ora-blue font-semibold hover:underline"
                             >
                               {config.phoneDisplay || config.phoneNumber}
                             </a>{' '}
-                            أو التواصل معنا عبر واتساب. سيقوم فريق المبيعات لدينا بترتيب وقت مناسب لك لزيارة العقار والإجابة على أي أسئلة قد تكون لديك.
+                            أو عبر واتساب. سيقوم فريق المبيعات بترتيب زيارة مناسبة لك.
                           </p>
                           <a
                             href={`tel:${config.phoneNumber}`}
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-tatweer-orange text-white rounded-xl font-semibold hover:bg-orange-600 transition-colors"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-ora-blue text-white rounded-xl font-semibold hover:bg-ora-blue-light transition-colors"
                           >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

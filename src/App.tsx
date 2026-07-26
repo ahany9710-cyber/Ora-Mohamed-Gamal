@@ -12,7 +12,7 @@ function App() {
         <Route
           path="/"
           element={
-            <div className="min-h-screen bg-white">
+            <div className="min-h-screen bg-ora-cream">
               <Header />
               <Landing />
               <Footer />

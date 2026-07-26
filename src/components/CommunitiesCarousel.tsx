@@ -22,22 +22,22 @@ const CommunitiesCarousel = () => {
   const currentCommunity = communities[currentIndex];
 
   return (
-    <section id="project-zones" className="w-full px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-8 md:pb-12 lg:pb-20 bg-gray-50">
+    <section id="project-zones" className="w-full px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-8 md:pb-12 lg:pb-20 bg-ora-sand/40">
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 md:mb-8">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-              Project Zones
+            <h2 className="text-2xl sm:text-3xl font-bold text-ora-ink mb-2">
+              Silver Walk & Silver Bay
             </h2>
-            <p className="text-gray-600">اكتشف مناطق مشروع IL Monte Galala - Marina Towers</p>
+            <p className="text-gray-600">اكتشف أحدث إطلاق في Silversands by Ora Developers</p>
           </div>
           <motion.button
             onClick={scrollToForm}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="px-6 py-3 bg-tatweer-orange text-white rounded-xl font-semibold hover:bg-orange-600 transition-colors shadow-md whitespace-nowrap"
+            className="px-6 py-3 bg-ora-blue text-white rounded-xl font-semibold hover:bg-ora-blue-light transition-colors shadow-md whitespace-nowrap"
           >
-            استكشف المناطق ←
+            اكتشف الوحدات ←
           </motion.button>
         </div>
 
@@ -45,11 +45,11 @@ const CommunitiesCarousel = () => {
           {/* Navigation arrows - matching ListingsCarousel style */}
           <button
             onClick={prev}
-            className="absolute lg:right-2 right-0 top-1/2 -translate-y-1/2 z-20 p-3 sm:p-4 md:p-5 shadow-2xl bg-white rounded-full border-2 border-gray-200 hover:border-tatweer-orange active:border-tatweer-orange transition-all min-w-[48px] min-h-[48px] flex items-center justify-center"
+            className="absolute lg:right-2 right-0 top-1/2 -translate-y-1/2 z-20 p-3 sm:p-4 md:p-5 shadow-2xl bg-white rounded-full border-2 border-gray-200 hover:border-ora-blue active:border-ora-blue transition-all min-w-[48px] min-h-[48px] flex items-center justify-center"
             aria-label="السابق"
           >
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6 text-tatweer-orange"
+              className="w-5 h-5 sm:w-6 sm:h-6 text-ora-blue"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -64,11 +64,11 @@ const CommunitiesCarousel = () => {
           </button>
           <button
             onClick={next}
-            className="absolute lg:left-2 left-0 top-1/2 -translate-y-1/2 z-20 p-3 sm:p-4 md:p-5 shadow-2xl bg-white rounded-full border-2 border-gray-200 hover:border-tatweer-orange active:border-tatweer-orange transition-all min-w-[48px] min-h-[48px] flex items-center justify-center"
+            className="absolute lg:left-2 left-0 top-1/2 -translate-y-1/2 z-20 p-3 sm:p-4 md:p-5 shadow-2xl bg-white rounded-full border-2 border-gray-200 hover:border-ora-blue active:border-ora-blue transition-all min-w-[48px] min-h-[48px] flex items-center justify-center"
             aria-label="التالي"
           >
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6 text-tatweer-orange"
+              className="w-5 h-5 sm:w-6 sm:h-6 text-ora-blue"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -113,8 +113,12 @@ const CommunitiesCarousel = () => {
                             <span
                               key={tag}
                               className={
-                                tag.includes('2030') || tag.includes('Tatweer') || tag === 'IL Monte Galala'
-                                  ? 'text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-orange-100 text-tatweer-orange uppercase tracking-wide'
+                                tag.includes('Silversands') ||
+                                tag.includes('Lagoon') ||
+                                tag.includes('Promenade') ||
+                                tag.includes('Bay') ||
+                                tag.includes('Night')
+                                  ? 'text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-sky-100 text-ora-blue uppercase tracking-wide'
                                   : 'text-xs sm:text-sm text-gray-500 uppercase tracking-wide'
                               }
                             >
@@ -137,7 +141,7 @@ const CommunitiesCarousel = () => {
                       {/* CTA Button */}
                       <button
                         onClick={scrollToForm}
-                        className="w-full py-4 px-6 bg-tatweer-orange text-white rounded-xl font-semibold text-lg hover:bg-orange-600 transition-colors shadow-lg"
+                        className="w-full py-4 px-6 bg-ora-blue text-white rounded-xl font-semibold text-lg hover:bg-ora-blue-light transition-colors shadow-lg"
                       >
                         احصل على مزيد من التفاصيل
                       </button>
@@ -166,7 +170,7 @@ const CommunitiesCarousel = () => {
                   onClick={() => goToIndex(i)}
                   className={`rounded-full transition-all min-w-[44px] min-h-[44px] flex items-center justify-center ${
                     i === currentIndex
-                      ? 'bg-tatweer-orange w-12 h-3'
+                      ? 'bg-ora-blue w-12 h-3'
                       : 'bg-gray-300 w-3 h-3 hover:bg-gray-400'
                   }`}
                   aria-label={`الانتقال إلى المنطقة ${i + 1}`}

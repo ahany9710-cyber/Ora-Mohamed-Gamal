@@ -52,13 +52,13 @@ const ThankYou = () => {
               download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block w-full px-8 py-4 bg-tatweer-orange text-white rounded-xl hover:bg-orange-600 transition-colors font-semibold shadow-lg"
+              className="inline-block w-full px-8 py-4 bg-ora-blue text-white rounded-xl hover:bg-ora-blue-light transition-colors font-semibold shadow-lg"
             >
               تحميل PDF
             </motion.a>
             <Link
               to="/"
-              className="block w-full px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:border-tatweer-orange hover:text-tatweer-orange transition-colors font-semibold"
+              className="block w-full px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:border-ora-blue hover:text-ora-blue transition-colors font-semibold"
             >
               العودة للصفحة الرئيسية
             </Link>
