@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  }
+
+  * {
+    @apply focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+  }
+}
