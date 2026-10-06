@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Flair Ora Quiz
  * Description: Game-style lead page for Ora projects (Solana, ZED, Silversands). Use the shortcode [flair_ora_quiz] on any page.
- * Version: 1.0.0
+ * Version: 2.1.0
  * Author: Flair Agency
  * Text Domain: flair-ora-quiz
  */
@@ -11,28 +11,29 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('FOQ_VERSION', '1.0.0');
+define('FOQ_VERSION', '2.1.0');
 define('FOQ_URL', plugin_dir_url(__FILE__));
 
 function foq_register_assets() {
     wp_register_style(
         'foq-fonts',
-        'https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600&display=swap',
         array(),
         null
     );
     wp_register_style('foq-style', FOQ_URL . 'assets/style.css', array('foq-fonts'), FOQ_VERSION);
     wp_register_script('foq-projects', FOQ_URL . 'assets/projects.js', array(), FOQ_VERSION, true);
-    wp_register_script('foq-app', FOQ_URL . 'assets/app.js', array('foq-projects'), FOQ_VERSION, true);
+    wp_register_script('foq-countries', FOQ_URL . 'assets/countries.js', array(), FOQ_VERSION, true);
+    wp_register_script('foq-app', FOQ_URL . 'assets/app.js', array('foq-projects', 'foq-countries'), FOQ_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'foq_register_assets');
 
 function foq_shortcode($atts) {
     $atts = shortcode_atts(
         array(
-            'whatsapp'   => '201200506690',
-            'phone'      => '+201200506690',
-            'formspree'  => 'mojgyaqz',
+            'whatsapp'   => '201063330224',
+            'phone'      => '+201063330224',
+            'formspree'  => 'xzeddbwr',
             'conversion' => '',
             'fullwidth'  => '1',
         ),
