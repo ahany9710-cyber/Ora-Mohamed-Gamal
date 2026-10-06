@@ -34,7 +34,6 @@ function foq_shortcode($atts) {
             'whatsapp'   => '201063330224',
             'phone'      => '+201063330224',
             'formspree'  => 'xzeddbwr',
-            'conversion' => '',
             'fullwidth'  => '1',
         ),
         $atts,
@@ -49,7 +48,6 @@ function foq_shortcode($atts) {
         'whatsapp'   => preg_replace('/\D/', '', $atts['whatsapp']),
         'phone'      => $atts['phone'],
         'formspree'  => $atts['formspree'],
-        'conversion' => $atts['conversion'],
     ));
 
     $classes = 'foq-root' . ($atts['fullwidth'] === '1' ? ' foq-fullwidth' : '');

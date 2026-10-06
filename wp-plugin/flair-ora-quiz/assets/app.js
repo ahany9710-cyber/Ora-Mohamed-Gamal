@@ -5,7 +5,7 @@
   if (!root) return;
 
   var cfg = Object.assign(
-    { assetsUrl: './assets/', whatsapp: '', phone: '', formspree: '', conversion: '', sound: true, advanceDelay: 650 },
+    { assetsUrl: './assets/', whatsapp: '', phone: '', formspree: '', sound: true, advanceDelay: 650 },
     window.FOQ_CONFIG || {}
   );
   var projects = window.FOQ_PROJECTS || [];
@@ -73,8 +73,7 @@
     return step === 1 ? p.units : p.purposes;
   }
 
-  function track(name, params) {
-    if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  function track(name) {
     if (typeof window.clarity === 'function') window.clarity('event', name);
   }
 
@@ -474,7 +473,7 @@
     }
     updateFab();
 
-    track('select_' + field, { project: state.project, value: value });
+    track('select_' + field);
     if (step === 0 && typeof window.clarity === 'function') window.clarity('set', 'project', value);
 
     timers.advance = setTimeout(function () {
@@ -536,10 +535,7 @@
     var href = waLink(['رقمي: ' + displayPhone(intl)]);
 
     sendLead(intl);
-    track('generate_lead', { project: state.project, unit: state.unit, purpose: state.purpose, country: state.country });
-    if (cfg.conversion && typeof window.gtag === 'function') {
-      window.gtag('event', 'conversion', { send_to: cfg.conversion });
-    }
+    track('generate_lead');
 
     var win = window.open(href, '_blank');
     if (win) {
@@ -613,7 +609,7 @@
         tone(987.77, 0.08, 0.5, 0.04);
         if (state.matched.length === state.deck.length) {
           chord(0.3);
-          track('game_won', { moves: state.moves });
+          track('game_won');
           $('[data-el="win"]').innerHTML =
             '<div class="foq-win"><span class="foq-win-label">برافو! خلصتها في ' + state.moves + ' محاولة</span>' +
             '<button type="button" class="foq-replay" data-action="replay">العب تاني</button></div>';
@@ -658,10 +654,10 @@
     } else if (action === 'replay') {
       replay();
     } else if (action === 'call') {
-      track('click_call', { project: state.project, step: state.step });
+      track('click_call');
     } else if (action === 'whatsapp') {
       tone(1046.5, 0, 0.4, 0.06);
-      track('click_whatsapp', { project: state.project, step: state.step });
+      track('click_whatsapp');
     }
   });
 
@@ -687,7 +683,7 @@
     $('input[name="phone"]').setAttribute('placeholder', phonePlaceholder());
     clearPhoneError();
     tone(880, 0, 0.18, 0.04);
-    track('select_country', { country: state.country });
+    track('select_country');
     $('input[name="phone"]').focus();
   });
 
