@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run quiz:sync && tsc -b && vite build",
+    "quiz:sync": "rm -rf public/quiz/assets && cp -R wp-plugin/flair-ora-quiz/assets public/quiz/assets",
+    "quiz:zip": "cd wp-plugin && rm -f flair-ora-quiz.zip && zip -rq flair-ora-quiz.zip flair-ora-quiz -x '*.DS_Store'",
     "lint": "eslint .",
     "preview": "vite preview"
   },
