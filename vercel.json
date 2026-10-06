@@ -2,7 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/quiz", "destination": "/quiz/index.html" },
+    { "source": "/silversands", "destination": "/silversands.html" },
+    { "source": "/thank-you", "destination": "/silversands.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "trailingSlash": false

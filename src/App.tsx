@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/silversands"
           element={
             <div className="min-h-screen bg-ora-cream">
               <Header />

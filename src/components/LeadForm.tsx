@@ -92,11 +92,6 @@ const LeadForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const getThankYouPath = (): string => {
-    const base = (typeof import.meta.env.BASE_URL === 'string' ? import.meta.env.BASE_URL : '').replace(/\.$/, '') || '/';
-    return base === '/' ? '/thank-you' : `${base.replace(/\/$/, '')}/thank-you`;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -122,7 +117,7 @@ const LeadForm = () => {
         res.status === 303 ||
         res.type === 'opaqueredirect';
       if (success) {
-        navigate(getThankYouPath());
+        navigate('/thank-you');
         return;
       }
       setIsSubmitting(false);

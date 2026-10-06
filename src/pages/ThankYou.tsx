@@ -57,7 +57,7 @@ const ThankYou = () => {
               تحميل PDF
             </motion.a>
             <Link
-              to="/"
+              to="/silversands"
               className="block w-full px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:border-ora-blue hover:text-ora-blue transition-colors font-semibold"
             >
               العودة للصفحة الرئيسية
