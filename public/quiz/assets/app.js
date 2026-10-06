@@ -263,24 +263,20 @@
   }
 
   // ——— Steps ———
-  function checkBadge() {
-    return (
-      '<span class="foq-check" aria-hidden="true"><span class="foq-check-ring"></span>' +
-      '<span class="foq-check-dot">' + ICONS.check(14, 3) + '</span></span>'
-    );
-  }
-
   function renderProjects() {
     var cards = projects.map(function (p, i) {
       var on = state.project === p.id;
       return (
         '<div class="foq-world-cell" style="animation-delay:' + (0.1 + i * 0.07).toFixed(2) + 's">' +
         '<button type="button" class="foq-tile foq-world' + (on ? ' is-on' : '') + '" data-action="pick" data-value="' + esc(p.id) + '" aria-pressed="' + on + '">' +
-        '<span class="foq-world-media"><img src="' + imagesUrl + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" /></span>' +
+        '<span class="foq-world-media"><img src="' + imagesUrl + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" />' +
+        '<span class="foq-pick-hint">اختار</span></span>' +
         '<span class="foq-world-body"><span class="foq-world-text">' +
         '<span class="foq-world-name" dir="ltr">' + esc(p.name) + '</span>' +
         '<span class="foq-world-place">' + esc(p.place) + '</span>' +
-        '</span>' + checkBadge() + '</span>' +
+        '</span>' +
+        '<span class="foq-radio" aria-hidden="true"><span class="foq-check-ring"></span>' + ICONS.check(12, 3.5) + '</span>' +
+        '</span>' +
         '</button></div>'
       );
     }).join('');
@@ -289,8 +285,8 @@
       '<section class="foq-step">' +
       '<div class="foq-head">' +
       '<span class="foq-kicker">اختار مشروعك مع Ora</span>' +
-      '<h1 class="foq-h1">تحب تعرف عن مشروع إيه أكتر؟</h1>' +
-      '<p class="foq-lead">3 اختيارات سريعة، والبروشور والأسعار يوصلوك على واتساب.</p>' +
+      '<h1 class="foq-h1">اختار المشروع</h1>' +
+      '<p class="foq-lead">اضغط على الكارت اللي يهمك عشان تعرف الأسعار وتاخد البروشور.</p>' +
       '</div>' +
       '<div class="foq-worlds">' + cards + '</div>' +
       '</section>'
@@ -313,12 +309,24 @@
       );
     }).join('');
 
+    var offer = '';
+    if (step === 1 && p.priceFrom) {
+      offer =
+        '<div class="foq-offer">' +
+        '<div class="foq-offer-item"><span class="foq-offer-k">يبدأ من</span>' +
+        '<span class="foq-offer-v">' + esc(p.priceFrom) + ' <span class="foq-offer-cur">جنيه</span></span></div>' +
+        '<div class="foq-offer-item"><span class="foq-offer-k">خطة الدفع</span>' +
+        '<span class="foq-offer-v is-plan">' + (Array.isArray(p.plan) ? p.plan : [p.plan]).map(esc).join('<br>') + '</span></div>' +
+        '</div>';
+    }
+
     return (
       '<section class="foq-step">' +
       '<div class="foq-head">' +
       '<span class="foq-kicker is-crumb" dir="ltr">' + esc(crumb) + '</span>' +
       '<h2 class="foq-h2">' + (step === 1 ? 'بتدور على إيه؟' : 'بتشتري ليه؟') + '</h2>' +
       '</div>' +
+      offer +
       '<div class="foq-opts">' + opts + '</div>' +
       '</section>'
     );
