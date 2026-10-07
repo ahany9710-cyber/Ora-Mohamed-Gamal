@@ -253,7 +253,7 @@
     $('[data-action="back"]').hidden = !(s > 0 && s < 4);
     var fills = root.querySelectorAll('.foq-pip-fill');
     for (var i = 0; i < fills.length; i++) {
-      fills[i].style.width = s > i ? '100%' : s === 3 && i === 3 ? '50%' : '0%';
+      fills[i].style.width = s > i ? '100%' : s === i ? '50%' : '0%';
     }
     updateFab();
   }
@@ -266,11 +266,14 @@
   function renderProjects() {
     var cards = projects.map(function (p, i) {
       var on = state.project === p.id;
+      var launch = p.launch && p.launch.length
+        ? '<span class="foq-launch">' + p.launch.map(function (line) { return '<span>' + esc(line) + '</span>'; }).join('') + '</span>'
+        : '';
       return (
         '<div class="foq-world-cell" style="animation-delay:' + (0.1 + i * 0.07).toFixed(2) + 's">' +
-        '<button type="button" class="foq-tile foq-world' + (on ? ' is-on' : '') + '" data-action="pick" data-value="' + esc(p.id) + '" aria-pressed="' + on + '">' +
+        '<button type="button" class="foq-tile foq-world' + (on ? ' is-on' : '') + (launch ? ' has-launch' : '') + '" data-action="pick" data-value="' + esc(p.id) + '" aria-pressed="' + on + '">' +
         '<span class="foq-world-media"><img src="' + imagesUrl + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" />' +
-        '<span class="foq-pick-hint">اختار</span></span>' +
+        '<span class="foq-pick-hint">اختار</span>' + launch + '</span>' +
         '<span class="foq-world-body"><span class="foq-world-text">' +
         '<span class="foq-world-name" dir="ltr">' + esc(p.name) + '</span>' +
         '<span class="foq-world-place">' + esc(p.place) + '</span>' +
@@ -283,6 +286,12 @@
 
     return (
       '<section class="foq-step">' +
+      '<figure class="foq-hero">' +
+      '<img src="' + imagesUrl + 'naguib-sawiris.png" alt="Naguib Sawiris" />' +
+      '<blockquote>' +
+      '<p>“ORA’s position is strong, it holds a legacy which has been earned through credibility, a diversified portfolio as well as offering the precious culture of happiness”</p>' +
+      '<footer><strong>NAGUIB SAWIRIS</strong><span>Chairman &amp; CEO</span></footer>' +
+      '</blockquote></figure>' +
       '<div class="foq-head">' +
       '<span class="foq-kicker">اختار مشروعك مع Ora</span>' +
       '<h1 class="foq-h1">اختار المشروع</h1>' +

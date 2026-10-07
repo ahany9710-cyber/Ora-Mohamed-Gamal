@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Flair Ora Quiz
  * Description: Game-style lead page for Ora projects (Solana, ZED, Silversands). Use the shortcode [flair_ora_quiz] on any page.
- * Version: 2.1.0
+ * Version: 2.3.0
  * Author: Flair Agency
  * Text Domain: flair-ora-quiz
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('FOQ_VERSION', '2.1.0');
+define('FOQ_VERSION', '2.3.0');
 define('FOQ_URL', plugin_dir_url(__FILE__));
 
 function foq_register_assets() {

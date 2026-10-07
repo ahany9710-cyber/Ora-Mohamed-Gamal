@@ -22,6 +22,7 @@
       purposes: cityPurposes,
       priceFrom: '13.5 مليون',
       plan: ['5% مقدم', '5% بعد 3 شهور', 'تقسيط على 8 سنين'],
+      launch: ['طرح أول سعر', 'شقق فندقية'],
     },
     {
       id: 'zed-east',
