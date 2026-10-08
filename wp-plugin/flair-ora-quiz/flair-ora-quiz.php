@@ -52,6 +52,8 @@ function foq_shortcode($atts) {
 
     $classes = 'foq-root' . ($atts['fullwidth'] === '1' ? ' foq-fullwidth' : '');
 
+    add_action('wp_footer', 'foq_meta_pixel');
+
     return '<div id="foq-app" class="' . esc_attr($classes) . '" dir="rtl" lang="ar">'
         . '<noscript><p style="padding:24px;text-align:center">'
         . 'من فضلك فعّل JavaScript أو تواصل معنا على واتساب: '
@@ -59,3 +61,28 @@ function foq_shortcode($atts) {
         . '</p></noscript></div>';
 }
 add_shortcode('flair_ora_quiz', 'foq_shortcode');
+
+function foq_meta_pixel() {
+    static $done = false;
+    if ($done) {
+        return;
+    }
+    $done = true;
+    ?>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1422003716325287');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1422003716325287&amp;ev=PageView&amp;noscript=1" alt="" /></noscript>
+    <!-- End Meta Pixel Code -->
+    <?php
+}
