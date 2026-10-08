@@ -32,7 +32,7 @@
   var timers = {};
 
   var DISCLAIMER =
-    'هذه الصفحة تديرها <strong>Flair Agency</strong> — جهة تسويق عقاري مستقلة وليست المطوّر، وتعمل بموجب اتفاقية حق تسويق لمشروعات Ora. الأسعار والتوفر قابلة للتغيير.';
+    'جميع الحقوق محفوظة لـ <span dir="ltr">Ora Developments</span>';
 
   var ICONS = {
     soundOn: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>',
@@ -250,7 +250,7 @@
     var s = state.step;
     $('[data-el="progress"]').hidden = s >= 4;
     $('[data-el="step-label"]').textContent = s < 3 ? 'خطوة ' + (s + 1) + ' من 4' : 'آخر خطوة';
-    $('[data-action="back"]').hidden = !(s > 0 && s < 4);
+    $('[data-action="back"]').hidden = !(s > 0 && s < 3);
     var fills = root.querySelectorAll('.foq-pip-fill');
     for (var i = 0; i < fills.length; i++) {
       fills[i].style.width = s > i ? '100%' : s === i ? '50%' : '0%';
@@ -322,10 +322,10 @@
     if (step === 1 && p.priceFrom) {
       offer =
         '<div class="foq-offer">' +
-        '<div class="foq-offer-item"><span class="foq-offer-k">يبدأ من</span>' +
-        '<span class="foq-offer-v">' + esc(p.priceFrom) + ' <span class="foq-offer-cur">جنيه</span></span></div>' +
-        '<div class="foq-offer-item"><span class="foq-offer-k">خطة الدفع</span>' +
-        '<span class="foq-offer-v is-plan">' + (Array.isArray(p.plan) ? p.plan : [p.plan]).map(esc).join('<br>') + '</span></div>' +
+        '<p class="foq-offer-line"><span class="foq-offer-k">يبدأ من</span> ' +
+        '<span class="foq-offer-v">' + esc(p.priceFrom) + '</span> <span class="foq-offer-cur">جنيه</span></p>' +
+        '<p class="foq-offer-line"><span class="foq-offer-k">خطة الدفع</span> ' +
+        (Array.isArray(p.plan) ? p.plan : [p.plan]).map(esc).join(' · ') + '</p>' +
         '</div>';
     }
 
@@ -335,27 +335,13 @@
       '<span class="foq-kicker is-crumb" dir="ltr">' + esc(crumb) + '</span>' +
       '<h2 class="foq-h2">' + (step === 1 ? 'بتدور على إيه؟' : 'بتشتري ليه؟') + '</h2>' +
       '</div>' +
-      offer +
       '<div class="foq-opts">' + opts + '</div>' +
+      offer +
       '</section>'
     );
   }
 
   function renderForm() {
-    var p = getProject(state.project);
-    var summary = [
-      { k: 'المشروع', v: p.name, step: 0 },
-      { k: 'الوحدة', v: state.unit, step: 1 },
-      { k: 'الغرض', v: state.purpose, step: 2 },
-    ].map(function (s, i) {
-      return (
-        '<button type="button" class="foq-summary-item" data-action="edit" data-step="' + s.step + '" style="animation-delay:' + (0.15 + i * 0.07).toFixed(2) + 's">' +
-        '<span class="foq-summary-k">' + esc(s.k) + '</span>' +
-        '<span class="foq-summary-v">' + esc(s.v) + '</span>' +
-        '</button>'
-      );
-    }).join('');
-
     return (
       '<section class="foq-step">' +
       '<div class="foq-head">' +
@@ -363,16 +349,15 @@
       '<h2 class="foq-h2">سيب رقمك ونبعتلك البروشور</h2>' +
       '<p class="foq-lead">حط رقمك — والبروشور والأسعار يوصلوك على واتساب.</p>' +
       '</div>' +
-      '<div class="foq-summary">' + summary + '</div>' +
       '<form class="foq-form" novalidate data-form="lead">' +
       '<label class="foq-field"><span class="foq-field-label" data-el="phone-label">رقم الموبايل <span class="foq-req">*</span></span>' +
       '<span class="foq-phone" dir="ltr">' +
       '<span class="foq-cc"><span class="foq-cc-display" data-el="cc-display">' + ccDisplay() + '</span>' +
       '<select class="foq-cc-select" name="country" aria-label="كود الدولة">' + countryOptions() + '</select></span>' +
-      '<input class="foq-input is-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel-national" dir="ltr" placeholder="' + phonePlaceholder() + '" value="' + esc(state.phone) + '" /></span>' +
+      '<input class="foq-input is-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel-national" dir="ltr" placeholder="' + phonePlaceholder() + '" value="' + esc(state.phone) + '" autofocus /></span>' +
       '</label>' +
       '<button type="submit" class="foq-submit">' + ICONS.whatsappSm + '<span>احصل على البروشور</span></button>' +
-      '<p class="foq-form-note">بإرسال الرقم توافق إن مستشار من Ora يتواصل معاك على واتساب أو تليفون.</p>' +
+      '<p class="foq-form-note">خلال ثواني هيكون عندك البروشور وخطة سداد مميزة وحصرية.</p>' +
       '</form>' +
       '</section>'
     );
@@ -438,7 +423,36 @@
     if (push) history.pushState(Object.assign({}, history.state, { foq: step }), '');
     renderStage();
     updateChrome();
+    if (step === 3) focusPhone();
+    else releaseTyping();
     if (root.getBoundingClientRect().top < 0) root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  var typing = null;
+
+  function armTyping() {
+    if (typing) return;
+    typing = document.createElement('input');
+    typing.type = 'tel';
+    typing.setAttribute('inputmode', 'tel');
+    typing.setAttribute('autocomplete', 'tel');
+    typing.setAttribute('aria-hidden', 'true');
+    typing.tabIndex = -1;
+    typing.style.cssText = 'position:fixed;opacity:0;height:0;width:0;border:0;padding:0;font-size:16px;';
+    document.body.appendChild(typing);
+    typing.focus();
+  }
+
+  function releaseTyping() {
+    if (!typing) return;
+    typing.remove();
+    typing = null;
+  }
+
+  function focusPhone() {
+    var phone = $('input[name="phone"]');
+    if (phone) phone.focus({ preventScroll: true });
+    releaseTyping();
   }
 
   function jumpBack(target) {
@@ -452,7 +466,7 @@
   }
 
   function back() {
-    if (state.picking || state.step === 0 || state.step === 4) return;
+    if (state.picking || state.step === 0 || state.step >= 3) return;
     tone(392, 0, 0.3, 0.05);
     jumpBack(state.step - 1);
   }
@@ -492,6 +506,7 @@
 
     track('select_' + field);
     if (step === 0 && typeof window.clarity === 'function') window.clarity('set', 'project', value);
+    if (step === 2) armTyping();
 
     timers.advance = setTimeout(function () {
       goTo(step + 1, true);
