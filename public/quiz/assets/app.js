@@ -13,12 +13,11 @@
   var waNumber = String(cfg.whatsapp).replace(/\D/g, '');
   var canHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
 
-  var FIELDS = ['project', 'unit', 'purpose'];
+  var FIELDS = ['project', 'unit'];
   var state = {
     step: 0,
     project: null,
     unit: null,
-    purpose: null,
     picking: false,
     sound: cfg.sound !== false,
     phone: '',
@@ -70,7 +69,7 @@
   function optionsFor(step) {
     var p = getProject(state.project);
     if (!p) return [];
-    return step === 1 ? p.units : p.purposes;
+    return p.units;
   }
 
   function track(name) {
@@ -209,7 +208,6 @@
     var lines = ['مرحبًا، عايز البروشور والأسعار'];
     if (p) lines.push('المشروع: ' + p.name);
     if (state.unit) lines.push('نوع الوحدة: ' + state.unit);
-    if (state.purpose) lines.push('الغرض: ' + state.purpose);
     if (extra) lines = lines.concat(extra);
     return 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(lines.join('\n'));
   }
@@ -217,7 +215,7 @@
   // ——— Shell (rendered once) ———
   function renderShell() {
     var pips = '';
-    for (var i = 0; i < 4; i++) pips += '<span class="foq-pip"><span class="foq-pip-fill"></span></span>';
+    for (var i = 0; i < 3; i++) pips += '<span class="foq-pip"><span class="foq-pip-fill"></span></span>';
 
     root.innerHTML =
       '<div class="foq-orbs" aria-hidden="true"><span class="foq-orb is-1"></span><span class="foq-orb is-2"></span></div>' +
@@ -248,9 +246,9 @@
 
   function updateChrome() {
     var s = state.step;
-    $('[data-el="progress"]').hidden = s >= 4;
-    $('[data-el="step-label"]').textContent = s < 3 ? 'خطوة ' + (s + 1) + ' من 4' : 'آخر خطوة';
-    $('[data-action="back"]').hidden = !(s > 0 && s < 3);
+    $('[data-el="progress"]').hidden = s >= 3;
+    $('[data-el="step-label"]').textContent = s < 2 ? 'خطوة ' + (s + 1) + ' من 3' : 'آخر خطوة';
+    $('[data-action="back"]').hidden = s !== 1;
     var fills = root.querySelectorAll('.foq-pip-fill');
     for (var i = 0; i < fills.length; i++) {
       fills[i].style.width = s > i ? '100%' : s === i ? '50%' : '0%';
@@ -303,14 +301,12 @@
   }
 
   function renderOptions() {
-    var step = state.step;
     var p = getProject(state.project);
-    var chosen = state[FIELDS[step]];
-    var crumb = step === 1 ? p.name : p.name + ' · ' + (state.unit || '');
-    var opts = optionsFor(step).map(function (label, i) {
+    var chosen = state.unit;
+    var opts = optionsFor(1).map(function (label, i) {
       var on = chosen === label;
       return (
-        '<div class="foq-opt-cell' + (step === 1 ? ' is-unit' : '') + '" style="animation-delay:' + (0.1 + i * 0.07).toFixed(2) + 's">' +
+        '<div class="foq-opt-cell is-unit" style="animation-delay:' + (0.1 + i * 0.07).toFixed(2) + 's">' +
         '<button type="button" class="foq-tile foq-opt' + (on ? ' is-on' : '') + '" data-action="pick" data-value="' + esc(label) + '" aria-pressed="' + on + '">' +
         '<span class="foq-opt-label">' + esc(label) + '</span>' +
         '<span class="foq-radio" aria-hidden="true"><span class="foq-check-ring"></span>' + ICONS.check(12, 3.5) + '</span>' +
@@ -319,7 +315,7 @@
     }).join('');
 
     var offer = '';
-    if (step === 1 && p.priceFrom) {
+    if (p.priceFrom) {
       offer =
         '<div class="foq-offer">' +
         '<p class="foq-offer-line"><span class="foq-offer-k">يبدأ من</span> ' +
@@ -332,8 +328,8 @@
     return (
       '<section class="foq-step">' +
       '<div class="foq-head">' +
-      '<span class="foq-kicker is-crumb" dir="ltr">' + esc(crumb) + '</span>' +
-      '<h2 class="foq-h2">' + (step === 1 ? 'بتدور على إيه؟' : 'بتشتري ليه؟') + '</h2>' +
+      '<span class="foq-kicker is-crumb" dir="ltr">' + esc(p.name) + '</span>' +
+      '<h2 class="foq-h2">بتدور على إيه؟</h2>' +
       '</div>' +
       '<div class="foq-opts">' + opts + '</div>' +
       offer +
@@ -390,7 +386,7 @@
       '<div class="foq-thanks-text">' +
       '<span class="foq-kicker">شكرًا ليك</span>' +
       '<h2 class="foq-h2">وصلنا طلبك</h2>' +
-      '<p class="foq-lead is-small">مستشار من Ora هيتواصل معاك قريب على <span dir="ltr">' + esc(displayPhone(state.intl || '')) + '</span>.</p>' +
+      '<p class="foq-lead is-small">مستشار من Ora هيتواصل معاك قريب' + (state.intl ? ' على <span dir="ltr">' + esc(displayPhone(state.intl)) + '</span>' : '') + '.</p>' +
       '</div></div>' +
       '<div class="foq-game">' +
       '<div class="foq-game-head"><div class="foq-game-title">' +
@@ -407,8 +403,8 @@
   function renderStage() {
     var html;
     if (state.step === 0) html = renderProjects();
-    else if (state.step === 1 || state.step === 2) html = renderOptions();
-    else if (state.step === 3) html = renderForm();
+    else if (state.step === 1) html = renderOptions();
+    else if (state.step === 2) html = renderForm();
     else html = renderThanks();
     $('[data-el="stage"]').innerHTML = html;
   }
@@ -418,12 +414,16 @@
     clearTimeout(timers.advance);
     state.picking = false;
     root.classList.remove('is-picking');
-    if (step > 0 && !getProject(state.project)) step = 0;
+    if (step > 0 && step < 3 && !getProject(state.project)) step = 0;
     state.step = step;
-    if (push) history.pushState(Object.assign({}, history.state, { foq: step }), '');
+    if (step === 3 && !state.deck.length) resetDeck();
+    if (push) {
+      history.pushState(Object.assign({}, history.state, { foq: step }), '', step === 3 ? '/thank-you' : location.pathname + location.search);
+      if (step === 3 && typeof window.fbq === 'function') window.fbq('track', 'PageView');
+    }
     renderStage();
     updateChrome();
-    if (step === 3) focusPhone();
+    if (step === 2) focusPhone();
     else releaseTyping();
     if (root.getBoundingClientRect().top < 0) root.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -466,7 +466,7 @@
   }
 
   function back() {
-    if (state.picking || state.step === 0 || state.step >= 3) return;
+    if (state.picking || state.step !== 1) return;
     tone(392, 0, 0.3, 0.05);
     jumpBack(state.step - 1);
   }
@@ -480,17 +480,14 @@
   // ——— Picking ———
   function pick(value) {
     var step = state.step;
-    if (state.picking || step > 2) return;
+    if (state.picking || step > 1) return;
     var field = FIELDS[step];
 
     tone([523.25, 659.25, 783.99][step], 0, 0.6, 0.08);
     tone([783.99, 987.77, 1174.66][step], 0.06, 0.5, 0.04);
     vibrate(8);
 
-    if (step === 0 && value !== state.project) {
-      state.unit = null;
-      state.purpose = null;
-    }
+    if (step === 0 && value !== state.project) state.unit = null;
     state[field] = value;
     state.picking = true;
     root.classList.add('is-picking');
@@ -506,7 +503,7 @@
 
     track('select_' + field);
     if (step === 0 && typeof window.clarity === 'function') window.clarity('set', 'project', value);
-    if (step === 2) armTyping();
+    if (step === 1) armTyping();
 
     timers.advance = setTimeout(function () {
       goTo(step + 1, true);
@@ -522,7 +519,6 @@
     data.append('country', getCountry(state.country).name + ' (' + state.country + ')');
     data.append('project', p ? p.name : '');
     data.append('unit', state.unit || '');
-    data.append('purpose', state.purpose || '');
     data.append('page', window.location.href);
     data.append('_subject', 'New Ora lead — ' + (p ? p.name : ''));
     var params = new URLSearchParams(window.location.search);
@@ -563,6 +559,7 @@
     var intl = toIntl(state.phone, state.country);
     if (!intl) return showPhoneError();
     state.intl = intl;
+    try { sessionStorage.setItem('foq-thanks', JSON.stringify({ intl: intl })); } catch (e) {}
 
     var href = waLink(['رقمي: ' + displayPhone(intl)]);
 
@@ -578,7 +575,7 @@
 
     chord();
     resetDeck();
-    goTo(4, true);
+    goTo(3, true);
   }
 
   // ——— Memory game ———
@@ -730,15 +727,23 @@
     if (/INPUT|TEXTAREA|SELECT/.test(event.target.tagName)) return;
     if (event.key === 'Escape') return back();
     var n = parseInt(event.key, 10);
-    if (state.step > 2 || !(n >= 1)) return;
+    if (state.step > 1 || !(n >= 1)) return;
     var list = state.step === 0 ? projects.map(function (p) { return p.id; }) : optionsFor(state.step);
     if (n <= list.length) pick(list[n - 1]);
   });
 
   // ——— Boot ———
+  if (/\/thank-you\/?$/.test(location.pathname)) {
+    state.step = 3;
+    try {
+      var savedThanks = JSON.parse(sessionStorage.getItem('foq-thanks') || 'null');
+      if (savedThanks && savedThanks.intl) state.intl = savedThanks.intl;
+    } catch (e) {}
+    resetDeck();
+  }
   renderShell();
   updateSoundButton();
-  history.replaceState(Object.assign({}, history.state, { foq: 0 }), '');
+  history.replaceState(Object.assign({}, history.state, { foq: state.step }), '', state.step === 3 ? '/thank-you' : location.pathname + location.search);
   renderStage();
   updateChrome();
 })();
