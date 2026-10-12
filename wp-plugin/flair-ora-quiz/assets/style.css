@@ -1105,6 +1105,13 @@
   font-weight: 500;
 }
 
+.foq-root .foq-disclaimer a,
+.foq-root .foq-form-note a {
+  color: var(--foq-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ——— Keyframes ——— */
 @keyframes foq-rise {
   from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
