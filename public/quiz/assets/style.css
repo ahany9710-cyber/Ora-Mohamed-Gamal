@@ -446,6 +446,7 @@
 
 .foq-root .foq-world-cell {
   flex: 1 1 150px;
+  scroll-margin: 24px;
   animation: foq-rise 0.6s var(--foq-ease) both;
 }
 

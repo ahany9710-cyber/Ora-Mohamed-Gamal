@@ -65,17 +65,6 @@
     return null;
   }
 
-  function projectFromPath() {
-    var id = location.pathname.replace(/\/+$/, '').split('/').pop();
-    return getProject(id) ? id : '';
-  }
-
-  function urlForStep(step) {
-    if (step === 3) return '/thank-you';
-    if (step === 0) return '/' + location.search;
-    return location.pathname + location.search;
-  }
-
   function optionsFor(step) {
     var p = getProject(state.project);
     if (!p) return [];
@@ -278,7 +267,7 @@
         ? '<span class="foq-launch">' + p.launch.map(function (line) { return '<span>' + esc(line) + '</span>'; }).join('') + '</span>'
         : '';
       return (
-        '<div class="foq-world-cell" style="animation-delay:' + (0.1 + i * 0.07).toFixed(2) + 's">' +
+        '<div class="foq-world-cell" id="' + esc(p.id) + '" style="animation-delay:' + (0.1 + i * 0.07).toFixed(2) + 's">' +
         '<button type="button" class="foq-tile foq-world' + (on ? ' is-on' : '') + (launch ? ' has-launch' : '') + '" data-action="pick" data-value="' + esc(p.id) + '" aria-pressed="' + on + '">' +
         '<span class="foq-world-media"><img src="' + imagesUrl + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" />' +
         '<span class="foq-pick-hint">اختار</span>' + launch + '</span>' +
@@ -428,7 +417,7 @@
     state.step = step;
     if (step === 3 && !state.deck.length) resetDeck();
     if (push) {
-      history.pushState(Object.assign({}, history.state, { foq: step }), '', urlForStep(step));
+      history.pushState(Object.assign({}, history.state, { foq: step }), '', step === 3 ? '/thank-you' : location.pathname + location.search);
       if (step === 3 && typeof window.fbq === 'function') window.fbq('track', 'PageView');
     }
     renderStage();
@@ -478,10 +467,6 @@
   function back() {
     if (state.picking || state.step !== 1) return;
     tone(392, 0, 0.3, 0.05);
-    if (projectFromPath()) {
-      goTo(0, true);
-      return;
-    }
     jumpBack(state.step - 1);
   }
 
@@ -754,17 +739,12 @@
       if (savedThanks && savedThanks.intl) state.intl = savedThanks.intl;
     } catch (e) {}
     resetDeck();
-  } else {
-    var directProject = projectFromPath();
-    if (directProject) {
-      state.project = directProject;
-      state.step = 1;
-      if (typeof window.clarity === 'function') window.clarity('set', 'project', directProject);
-    }
   }
   renderShell();
   updateSoundButton();
-  history.replaceState(Object.assign({}, history.state, { foq: state.step }), '', urlForStep(state.step));
+  history.replaceState(Object.assign({}, history.state, { foq: state.step }), '', state.step === 3 ? '/thank-you' : location.pathname + location.search);
   renderStage();
   updateChrome();
+  var anchor = document.getElementById((location.hash || '').replace('#', ''));
+  if (anchor) anchor.scrollIntoView({ block: 'center' });
 })();
