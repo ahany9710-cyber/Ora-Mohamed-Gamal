@@ -5,6 +5,16 @@
     { "source": "/thank-you", "destination": "/index.html" },
     { "source": "/thank-you/", "destination": "/index.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/privacy/", "destination": "/privacy.html" }
+    { "source": "/privacy/", "destination": "/privacy.html" },
+    { "source": "/solana-east", "destination": "/index.html" },
+    { "source": "/solana-east/", "destination": "/index.html" },
+    { "source": "/zed-east", "destination": "/index.html" },
+    { "source": "/zed-east/", "destination": "/index.html" },
+    { "source": "/zed-west", "destination": "/index.html" },
+    { "source": "/zed-west/", "destination": "/index.html" },
+    { "source": "/solana-west", "destination": "/index.html" },
+    { "source": "/solana-west/", "destination": "/index.html" },
+    { "source": "/silversands", "destination": "/index.html" },
+    { "source": "/silversands/", "destination": "/index.html" }
   ]
 }
